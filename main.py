@@ -100,19 +100,21 @@ for doctor in doctors:
     except:
         nom = ""
     try:
-        # Par défaut, consultation sur place
         consultation = "Sur place"
         consultationDiv = doctor.find_element(By.CLASS_NAME, "dl-profile-booking-card-wrapper")
-        # Vérifier si la consultation vidéo est disponible
         consultationDiv.find_element(By.CSS_SELECTOR, 'div[data-test="telehealth"]')
-        consultation = "Sur place,Vidéo"
+        consultation = "Sur place et en Vidéo"
     except:
-        # Si pas de vidéo, on garde seulement "Sur place"
         pass
-    try:
-        secteur = doctor.find_element(By.CLASS_NAME, "dl-insurance").text
-    except:
-        secteur = ""
+    cards = driver.find_elements(By.CLASS_NAME, "dl-profile-card")
+    if cards:
+        first_card = cards[0]
+        try:
+            p_tags = first_card.find_element(By.CLASS_NAME, "dl-profile-text").find_elements(By.TAG_NAME, "p")
+            if p_tags:  # vérifier qu'il y a bien au moins un <p>
+                secteur = p_tags[0].text
+        except:
+            secteur = ""
     try:
         prix = doctor.find_element(By.CLASS_NAME, "dl-price").text
     except:
