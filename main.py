@@ -75,6 +75,21 @@ data = []
 # Récupérer le main
 main_section = driver.find_element(By.TAG_NAME, "main")
 
+search_toolbar = main_section.find_element(By.CSS_SELECTOR, 'div[data-test-id="search-toolbar"]')
+buttons = search_toolbar.find_elements(By.TAG_NAME, "button")
+print(buttons)
+
+if buttons:
+    buttons[1].click()
+    radio_today = driver.find_element(By.CSS_SELECTOR, "div.dl-modal-body div[data-design-system-component='Radio']:first-child")
+    radio_today.click()
+    submit_filter = driver.find_element(By.CSS_SELECTOR, "button[data-test-id='submit-filter']")
+    submit_filter.click()
+else:
+    print("Aucun bouton trouvé")
+    
+time.sleep(5)
+
 # Conteneur principal des résultats dans le main
 container = main_section.find_element(By.CSS_SELECTOR, "div.max-w-search-results-container")
 
@@ -83,25 +98,42 @@ doctors = container.find_elements(By.CLASS_NAME, "dl-card")
 print(f"{len(doctors)} cartes trouvées dans le main !")
 
 for doctor in doctors:
+    try:
+        availabilities_container = doctor.find_element(By.CSS_SELECTOR, 'div[data-test-id="availabilities-container"]')
+        try:
+            next_div = availabilities_container.find_element(By.CSS_SELECTOR, 'div[data-design-system="oxygen"]')
+            button = next_div.find_element(By.TAG_NAME, "button")
+            dispo = button.find_element(By.CSS_SELECTOR, "span.dl-button-label span").text
+        except:
+            dispo = "Aucune disponibilité"
+    except:
+        dispo = "Aucune disponibilité"
+
+    print(dispo)
+
+        
     # récupérer le lien vers la fiche du médecin
     link = doctor.find_element(By.TAG_NAME, "a").get_attribute("href")
     
-    # ouvrir la fiche dans le même onglet
-    driver.get(link)
+    # ouvrir la fiche dans un nouvel onglet
+    driver.execute_script("window.open(arguments[0], '_blank');", link)
     
-    # attendre que la fiche charge
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "dl-profile-header"))  # exemple
-    ) 
+    # passer sur le nouvel onglet
+    driver.switch_to.window(driver.window_handles[1])
+    
+    time.sleep(5)
 
     try:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "dl-profile-header"))
+        ) 
         nomDiv = driver.find_element(By.CLASS_NAME, "dl-profile-header-name-speciality")
         nom = nomDiv.find_element(By.CLASS_NAME, "dl-text").text
     except:
         nom = ""
     try:
         consultation = "Sur place"
-        consultationDiv = doctor.find_element(By.CLASS_NAME, "dl-profile-booking-card-wrapper")
+        consultationDiv = driver.find_element(By.CLASS_NAME, "dl-profile-booking-card-wrapper")
         consultationDiv.find_element(By.CSS_SELECTOR, 'div[data-test="telehealth"]')
         consultation = "Sur place et en Vidéo"
     except:
@@ -111,12 +143,15 @@ for doctor in doctors:
         first_card = cards[0]
         try:
             p_tags = first_card.find_element(By.CLASS_NAME, "dl-profile-text").find_elements(By.TAG_NAME, "p")
-            if p_tags:  # vérifier qu'il y a bien au moins un <p>
+            if p_tags:
                 secteur = p_tags[0].text
         except:
             secteur = ""
     try:
-        prix = doctor.find_element(By.CLASS_NAME, "dl-price").text
+        prixTitle = driver.find_element(By.XPATH,'//h2[contains(@class,"dl-profile-card-title") and normalize-space(text())="Tarifs"]')
+        prix_card = prixTitle.find_element(By.XPATH, "./ancestor::div[contains(@class, 'dl-profile-card-content')]")
+        prix_list = prix_card.find_elements(By.TAG_NAME, "li")
+        prix = ", ".join([li.text for li in prix_list]) 
     except:
         prix = ""
     try:
@@ -127,11 +162,6 @@ for doctor in doctors:
         ville = " ".join(code_ville.split(" ")[1:]) if code_ville else ""
     except:
         rue = code_postal = ville = ""
-
-    try:
-        dispo = doctor.find_element(By.CLASS_NAME, "dl-next-available").text
-    except:
-        dispo = ""
 
     data.append({
         "Nom": nom,
@@ -144,17 +174,19 @@ for doctor in doctors:
         "Ville": ville
     })
     
-    # retourner à la page de résultats
-    driver.back()
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "dl-card"))
-    )
+    # fermer l'onglet du médecin
+    driver.close()
+    
+    # revenir à la page des résultats
+    driver.switch_to.window(driver.window_handles[0])
 
 # ------------------------------
 # Export CSV
 # ------------------------------
 df = pd.DataFrame(data)
-df.to_csv("docteurs.csv", index=False, encoding="utf-8-sig")
+df['Prix'] = df['Prix'].str.replace('\n', ' | ', regex=True)
+df['Secteur assurance'] = df['Secteur assurance'].str.replace('\n', ' | ', regex=True)
+df.to_csv("docteurs.csv", index=False, encoding="utf-8-sig", sep=';')
 print("Scraping terminé, fichier docteurs.csv créé !")
 
 # ------------------------------

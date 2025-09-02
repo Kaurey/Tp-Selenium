@@ -1,22 +1,15 @@
-﻿Nom,Prochaine disponibilité,Consultation,Secteur assurance,Prix,Rue,Code postal,Ville
-Dr Didier HERSHKOVITCH,,Sur place,Conventionné secteur 1,,,,
-Dr Perrine GILLOT FAYOLLE,,Sur place,Conventionné secteur 2,,,,
-Dr Fabrice Uzan,,Sur place,Conventionné secteur 1,,,,
-Dr Stéphane AUROY,,Sur place,Conventionné secteur 2,,,,
-Dr. Frederic MOULY,,Sur place,Conventionné secteur 2,,,,
-Dr Flore Kurihara,,Sur place,Conventionné secteur 2,,,,
-Dr Antoine TOULON,,Sur place,Conventionné secteur 2,,,,
-Dr Marianne CHOPINAUD,,Sur place,Conventionné secteur 2,,,,
-Centre médical Réaumur - CPAM Paris,,Sur place,Établissement conventionné,,,,
-Dr Philippe BONHOMME,,Sur place,Conventionné secteur 1,,,,
-Dr Corinne Jouanique,,Sur place,Conventionné secteur 1,,,,
-Dr Patricia MARTIN-LAMANTHE,,Sur place,Conventionné secteur 2,,,,
-Dr Romain Samaran,,Sur place,Conventionné secteur 2,,,,
-Dr Elina Zuelgaray,,Sur place,Conventionné secteur 2,,,,
-Dr Olivier Brachat,,Sur place,Conventionné secteur 2,,,,
-Centre de Santé Haussmann,,Sur place,Établissement conventionné,,,,
-Dr Hélène Friess,,Sur place,Carte Vitale acceptée,,,,
-Centre Médical Ramsay Santé Saint-Michel (ex-Cosem),,Sur place,Établissement conventionné,,,,
-Dr Ramona Cristina ISOPESCU,,Sur place,"Carte Vitale acceptée
-Tiers payant : Sécurité sociale et mutuelle",,,,
-Centre Médical Ramsay Santé Auber,,Sur place,Établissement conventionné,,,,
+﻿Nom;Prochaine disponibilité;Consultation;Secteur assurance;Prix;Rue;Code postal;Ville
+Dr Christelle GALLIOT;Aucune disponibilité;Sur place et en Vidéo;Conventionné secteur 2 avec OPTAM;Consultation de suivi de dermatologie | 70 € à 90 €, Première consultation de dermatologie | 70 € à 90 €, Consultation de chirurgie dermatologique | 130 € à 180 €, Consultation vidéo - Nouveau patient | 30 € à 60 €, Consultation vidéo | 30 € à 60 €;;;
+Dr Sam BENOLIEL;Aucune disponibilité;Sur place;Conventionné secteur 2;Consultation | 120 €, Laser | 250 € à 1 500 €;;;
+Dr Louai JABALLAH;Aucune disponibilité;Sur place et en Vidéo;Secteur 3 (non-conventionné);première consultation de dermatologie | 150 €, acte chirurgical (sur devis à partir de 350 eur) | 350 € à 0 €, consultation de suivi curacné | 100 €;;;
+Dr Iuliana-Elena Nita;Aucune disponibilité;Sur place;Secteur 3 (non-conventionné);Consultation de dermatologie médicale / suivi | 150 €, Laser CO2 - grain de beauté / excroissance | 300 € à 1 000 €, Botulinum toxin (1 flacon) | 450 €, Botulinum toxin (hyperhidrose - 2 flacons) | 750 €, Acide hyaluronique (1 seringue) | 450 €, Traitement laser de la couperose | 250 € à 1 000 €, Chirurgie de grain de beauté / lésion maligne / CBC | 350 € à 1 000 €, Thérapie photodynamique (PDT) | 250 € à 800 €;;;
+Dr Wiam Khamari;Aucune disponibilité;Sur place;Secteur 3 (non-conventionné);Consultation de dermatologie médicale | 180 €, Consultation de dermatologie médicale - suivi | 150 €, Cryothérapie suivi | 180 €, Chirurgie de kyste / grain de beauté / lésion maligne / CBC | 350 € à 750 €, Biopsie + Consultation Dermatologie | 250 €, Ablation lésions dermatologiques - Laser CO2 | 250 € à 800 €, Ablation grain de milium (avec assistante) | 50 € à 250 €;;;
+Skin Marceau - Dermatologie et épilation Laser;Aucune disponibilité;Sur place;Secteur 3 (non-conventionné);;;;
+Dr Céline PHAN;Aucune disponibilité;Sur place et en Vidéo;Conventionné secteur 2;Consultation vidéo | 80 € à 90 €, Première consultation de dermatologie | 90 € à 120 €, Consultation de surveillance annuelle de grain de beauté | 100 € à 100 €, Consultation de suivi | 90 € à 100 €;;;
+Dr Bernard Peyronnet;Aucune disponibilité;Sur place;Secteur 3 (non-conventionné);Consultation | 100 €, Peeling superficiel | 200 €, Peeling BPEEL | 300 €, Peeling moyen | 300 € à 600 €, Vergétures : brazapeel | 200 €, Needling | 250 €, Self-regenering | 450 €, Cryolipolyse | 450 €, Botox | 500 €, Acide hyaluronique | 500 €, Skintightening (laser YAG) | 250 €, Epilation laser petite surface | 100 € à 200 €, Epilation laser surface moyenne (demi-jambe) | 150 € à 300 €, Epilation laser grande surface (jambe entière) | 400 €, Botox pour hyperhydrose (transpiration excessive) | 800 €, Nettoyage de peau (achnée, pores dilatées) | 150 €, Fil tenseur (prix par fil) | 250 €;;;
+Clinique de Chirurgie Dermatologique Paris;Aucune disponibilité;Sur place;Établissement conventionné;;;;
+Institut médical de chirurgie dermatologique, chirurgie réparatrice et diagnostique cancer de la peau;Aucune disponibilité;Sur place;Établissement conventionné;;;;
+Maison Abeille;Aucune disponibilité;Sur place et en Vidéo;;;;;
+Centre Skin Laser;Aucune disponibilité;Sur place;;;;;
+Cabinet de dermatologie chirurgicale;Aucune disponibilité;Sur place;;;;;
+Dr Martine LANCRI;Aucune disponibilité;Sur place;Conventionné secteur 2;Consultation | 80 €;;;
