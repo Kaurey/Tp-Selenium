@@ -87,8 +87,8 @@ def collect_dispos(driver, doctor):
 DEFAULT_LOCALISATION = "75001"
 DEFAULT_REQUETE_MEDICALE = "dermatologue"
 
-# LOCALISATION = input(f"Entrez la localisation [{DEFAULT_LOCALISATION}] : ") or DEFAULT_LOCALISATION
-# REQUETE_MEDICALE = input(f"Entrez la requête médicale [{DEFAULT_REQUETE_MEDICALE}] : ") or DEFAULT_REQUETE_MEDICALE
+LOCALISATION = input(f"Entrez la localisation [{DEFAULT_LOCALISATION}] : ") or DEFAULT_LOCALISATION
+REQUETE_MEDICALE = input(f"Entrez la requête médicale [{DEFAULT_REQUETE_MEDICALE}] : ") or DEFAULT_REQUETE_MEDICALE
 
 # ------------------------------
 # Initialisation Selenium
