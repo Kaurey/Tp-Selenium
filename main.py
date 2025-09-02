@@ -14,69 +14,69 @@ def collect_dispos(driver, doctor):
     """
     all_disponibilites = {}
 
-    while True:
-        try:
-            availabilities_container = doctor.find_element(
-                By.CSS_SELECTOR, 'div[data-test-id="availabilities-container"]'
-            )
+    # while True:
+    #     try:
+    #         availabilities_container = doctor.find_element(
+    #             By.CSS_SELECTOR, 'div[data-test-id="availabilities-container"]'
+    #         )
 
-            # Vérifier s'il y a le message "Aucune disponibilité en ligne"
-            try:
-                no_dispo_msg = availabilities_container.find_element(
-                    By.XPATH, ".//*[contains(text(), 'Aucune disponibilité en ligne')]"
-                )
-                if no_dispo_msg:
-                    print("❌ Message détecté : Aucune disponibilité en ligne -> arrêt.")
-                    break
-            except:
-                pass  # pas de message, on continue
+    #         # Vérifier s'il y a le message "Aucune disponibilité en ligne"
+    #         try:
+    #             no_dispo_msg = availabilities_container.find_element(
+    #                 By.XPATH, ".//*[contains(text(), 'Aucune disponibilité en ligne')]"
+    #             )
+    #             if no_dispo_msg:
+    #                 print("❌ Message détecté : Aucune disponibilité en ligne -> arrêt.")
+    #                 break
+    #         except:
+    #             pass  # pas de message, on continue
 
-            # Cliquer sur "Voir plus de créneaux" si présent
-            try:
-                voir_plus_btn = availabilities_container.find_element(
-                    By.XPATH, './/button[span[text()="Voir plus de créneaux"]]'
-                )
-                driver.execute_script("arguments[0].click();", voir_plus_btn)
-                time.sleep(1)  # laisser le temps au calendrier de se charger
-            except:
-                pass
+    #         # Cliquer sur "Voir plus de créneaux" si présent
+    #         try:
+    #             voir_plus_btn = availabilities_container.find_element(
+    #                 By.XPATH, './/button[span[text()="Voir plus de créneaux"]]'
+    #             )
+    #             driver.execute_script("arguments[0].click();", voir_plus_btn)
+    #             time.sleep(1)  # laisser le temps au calendrier de se charger
+    #         except:
+    #             pass
 
-            # Récupérer tous les jours
-            jours_divs = availabilities_container.find_elements(
-                By.CSS_SELECTOR, "div.flex.flex-1.flex-col.gap-8.min-w-0"
-            )
-            disponibilites_par_jour = {}
+    #         # Récupérer tous les jours
+    #         jours_divs = availabilities_container.find_elements(
+    #             By.CSS_SELECTOR, "div.flex.flex-1.flex-col.gap-8.min-w-0"
+    #         )
+    #         disponibilites_par_jour = {}
 
-            for jour_div in jours_divs:
-                try:
-                    jour = jour_div.find_element(By.CSS_SELECTOR, "div:first-child span:nth-of-type(1)").text
-                    date = jour_div.find_element(By.CSS_SELECTOR, "div:first-child span:nth-of-type(2)").text
+    #         for jour_div in jours_divs:
+    #             try:
+    #                 jour = jour_div.find_element(By.CSS_SELECTOR, "div:first-child span:nth-of-type(1)").text
+    #                 date = jour_div.find_element(By.CSS_SELECTOR, "div:first-child span:nth-of-type(2)").text
 
-                    boutons = jour_div.find_elements(By.CSS_SELECTOR, "div:nth-child(2) button.dl-button")
-                    horaires = [b.find_element(By.CSS_SELECTOR, "span.dl-button-label").text for b in boutons]
+    #                 boutons = jour_div.find_elements(By.CSS_SELECTOR, "div:nth-child(2) button.dl-button")
+    #                 horaires = [b.find_element(By.CSS_SELECTOR, "span.dl-button-label").text for b in boutons]
 
-                    disponibilites_par_jour[f"{jour} {date}"] = horaires if horaires else ["—"]
-                except:
-                    continue
+    #                 disponibilites_par_jour[f"{jour} {date}"] = horaires if horaires else ["—"]
+    #             except:
+    #                 continue
 
-            # Fusionner les dispos de cette semaine
-            all_disponibilites.update(disponibilites_par_jour)
+    #         # Fusionner les dispos de cette semaine
+    #         all_disponibilites.update(disponibilites_par_jour)
 
-            # Cliquer sur la flèche "semaine suivante"
-            try:
-                next_week_btn = availabilities_container.find_element(
-                    By.XPATH,
-                    ".//button[contains(@aria-label, 'disponibilités') or contains(@aria-label, 'semaine suivante')]"
-                )
-                driver.execute_script("arguments[0].click();", next_week_btn)
-                time.sleep(1.5)
-            except:
-                print("❌ Pas de bouton semaine suivante, arrêt.")
-                break
+    #         # Cliquer sur la flèche "semaine suivante"
+    #         try:
+    #             next_week_btn = availabilities_container.find_element(
+    #                 By.XPATH,
+    #                 ".//button[contains(@aria-label, 'disponibilités') or contains(@aria-label, 'semaine suivante')]"
+    #             )
+    #             driver.execute_script("arguments[0].click();", next_week_btn)
+    #             time.sleep(1.5)
+    #         except:
+    #             print("❌ Pas de bouton semaine suivante, arrêt.")
+    #             break
 
-        except Exception as e:
-            print("Erreur dans la collecte des disponibilités :", e)
-            break
+    #     except Exception as e:
+    #         print("Erreur dans la collecte des disponibilités :", e)
+    #         break
 
     return all_disponibilites
 
@@ -87,8 +87,8 @@ def collect_dispos(driver, doctor):
 DEFAULT_LOCALISATION = "75001"
 DEFAULT_REQUETE_MEDICALE = "dermatologue"
 
-LOCALISATION = input(f"Entrez la localisation [{DEFAULT_LOCALISATION}] : ") or DEFAULT_LOCALISATION
-REQUETE_MEDICALE = input(f"Entrez la requête médicale [{DEFAULT_REQUETE_MEDICALE}] : ") or DEFAULT_REQUETE_MEDICALE
+# LOCALISATION = input(f"Entrez la localisation [{DEFAULT_LOCALISATION}] : ") or DEFAULT_LOCALISATION
+# REQUETE_MEDICALE = input(f"Entrez la requête médicale [{DEFAULT_REQUETE_MEDICALE}] : ") or DEFAULT_REQUETE_MEDICALE
 
 # ------------------------------
 # Initialisation Selenium
@@ -231,17 +231,24 @@ for doctor in doctors:
     except:
         prix = ""
     try:
-        adresse = doctor.find_element(By.CLASS_NAME, "dl-address").text
-        rue = adresse.split(",")[0] if "," in adresse else adresse
-        code_ville = adresse.split(",")[1].strip() if "," in adresse else ""
-        code_postal = code_ville.split(" ")[0] if code_ville else ""
-        ville = " ".join(code_ville.split(" ")[1:]) if code_ville else ""
+        adresse = driver.find_element(By.CSS_SELECTOR, "div[data-test=location] p:nth-child(2)").text
+        print("Adresse brute :", adresse)
+        if "," in adresse:
+            rue, code_ville = [part.strip() for part in adresse.split(",", 1)]
+            code_postal = code_ville.split(" ")[0]
+            ville = " ".join(code_ville.split(" ")[1:])
+        else:
+            rue = adresse
+            code_postal = ""
+            ville = ""
     except:
         rue = code_postal = ville = ""
 
+    print(rue, code_postal, ville)
+
     data.append({
         "Nom": nom,
-        "Prochaine disponibilité": disponibilites_par_jour,
+        "Disponibilité": disponibilites_par_jour,
         "Consultation": consultation,
         "Secteur assurance": secteur,
         "Prix": prix,
